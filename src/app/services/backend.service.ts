@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BackendService {
-  private apiUrl = 'http://54.236.211.115:8080';
+  private apiUrl = 'http://54.242.112.30:8080';
 
   constructor(private http: HttpClient) { }
 
@@ -135,7 +135,7 @@ export class BackendService {
   }
 
   obtenerInscripcionesPorUsuario(usuarioId: number) {
-    return this.http.get<any[]>(`http://54.236.211.115:8080/inscripciones/usuario/${usuarioId}`);
+    return this.http.get<any[]>(`http://54.242.112.30:8080/inscripciones/usuario/${usuarioId}`);
   }
   crearInscripcion(inscripcion: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/inscripciones`, inscripcion);
