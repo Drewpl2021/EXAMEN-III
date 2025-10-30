@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://54.234.163.78:8080/auth';
+  private apiUrl = 'http://54.236.211.115:8080/auth';
   private authenticatedUserEmail: string | null = null;
   private usuario: any = null;
 
@@ -50,7 +50,7 @@ export class AuthService {
     }
 
     const userId = usuario.id; // Obtener el ID del usuario
-    const url = `http://54.234.163.78:8080/auth/change-password/${userId}`;
+    const url = `http://54.236.211.115:8080/auth/change-password/${userId}`;
     const body = { currentPassword, newPassword };
 
     return this.http.put(url, body,{ responseType: 'text' });
