@@ -1,0 +1,679 @@
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espacio entre los elementos */
+}
+
+.search-input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 300px; /* Ancho del campo de búsqueda */
+  flex-shrink: 0;
+}
+
+.action-button {
+  padding: 10px 20px; /* Uniforme para todos los botones */
+  font-size: 14px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.action-button:hover {
+  transform: scale(1.05);
+}
+
+.export-button {
+  background-color: #005fb1;
+}
+
+.new-user-button {
+  background-color: #005fb1;
+}
+
+.download-button {
+  background-color: #005fb1;
+}
+
+.import-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 5px 10px;
+  background-color: #f8f9fa;
+}
+
+.import-label {
+  color: #333;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.submit-button {
+  background-color: #005fb1;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #003f7f;
+}
+
+.import-container input[type="file"] {
+  display: none; /* Ocultamos el input de archivo */
+}
+
+
+
+
+
+.form {
+  max-width: 400px; /* Limita el ancho del formulario */
+  margin: 0 auto; /* Centra el formulario en la página */
+  padding: 20px;
+  background-color: #f9f9f9; /* Fondo suave */
+  border: 1px solid #ddd;
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  font-family: Arial, sans-serif;
+  margin-top: 100px;
+}
+
+/* Estilo para el contenedor de cada campo */
+.form div {
+  margin-bottom: 15px;
+}
+
+/* Estilo para la etiqueta */
+.form label {
+  font-size: 16px;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Estilo para el input de archivo */
+.form input[type="file"] {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Estilo para el botón */
+.form button {
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+}
+
+/* Cambia el color del botón al pasar el ratón */
+.form button:hover {
+  background-color: #0056b3;
+}
+
+
+
+
+
+/* Contenedor principal */
+.container {
+  max-width: 1500px;
+  margin: auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* Encabezado */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+
+
+.search-bar input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-right: 10px;
+  width: 550px;
+}
+
+.add-button {
+  padding: 10px 20px;
+  background-color: #ffd966;
+  color: #333;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Filtros */
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filters select {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+/* Tabla */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+table th {
+  color: #333;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Acciones */
+.actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 0 5px;
+  font-size: 16px;
+}
+
+/* Paginación */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.pagination select {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+/* user-list.component.css */
+
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  padding: 10px;
+  width: 250px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.search-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.search-bar input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-right: 10px;
+  width: 550px;
+}
+
+.add-button {
+  padding: 10px 20px;
+  background-color: #ffd966;
+  color: #333;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+
+/* Contenedor del formulario de carga */
+.file-upload-form {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+/* Estilo de la etiqueta para el selector de archivos */
+.file-upload-form .form-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #333;
+  font-weight: bold;
+  margin-right: 15px;
+  font-size: 16px;
+}
+
+.file-upload-form .form-label i {
+  margin-right: 8px;
+  color: #007bff;
+}
+
+/* Estilo del input de archivo (oculto) */
+.file-upload-form .file-input {
+  display: none;
+}
+
+/* Estilo del botón de envío */
+.file-upload-form .submit-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.file-upload-form .submit-button:hover {
+  background-color: #0056b3;
+}
+
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-dialog {
+  max-width: 800px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.modal-title {
+  margin: 0;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 20px 0;
+}
+
+.user-form .form-group {
+  margin-bottom: 1rem;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.col-md-6 {
+  flex: 1;
+}
+
+.card {
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+  color: #005fb1;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: #005fb1;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #003f7f;
+}
+
+h2 {
+  color: #333;
+  font-weight: bold;
+}
+/* Estilo para centrar el modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+}
+
+.modal-dialog {
+  background: #fff;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  background: #007bff;
+  color: #fff;
+  padding: 15px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.modal-header .btn-close {
+  color: #fff;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+}
+
+.modal-body {
+  padding: 20px;
+}
+/* Contenedor principal de la paginación */
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 15px;
+  font-family: Arial, sans-serif;
+}
+
+/* Controles de líneas por página */
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pagination-label {
+  font-size: 14px;
+  color: #555;
+}
+
+.pagination-select {
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pagination-select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Información de la paginación */
+.pagination-info {
+  font-size: 14px;
+  color: #555;
+}
+
+/* Botones de paginación */
+.pagination-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.pagination-btn {
+  padding: 8px 15px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.pagination-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.pagination-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+/* Botón "Anterior" */
+.prev-btn {
+  background-color: #007bff;
+}
+
+/* Botón "Siguiente" */
+.next-btn {
+  background-color: #007bff;
+}
+/* Contenedor de la paginación */
+.pagination-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-top: 15px;
+  font-family: Arial, sans-serif;
+}
+
+/* Controles de líneas por página */
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pagination-label {
+  font-size: 14px;
+  color: #555;
+}
+
+.pagination-select {
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pagination-select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Información de la paginación */
+.pagination-info {
+  font-size: 14px;
+  color: #555;
+  text-align: center;
+}
+
+/* Botones de paginación */
+.pagination-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.pagination-btn {
+  padding: 8px 15px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.pagination-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.pagination-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+/* Botón "Anterior" */
+.prev-btn {
+  background-color: #007bff;
+}
+
+/* Botón "Siguiente" */
+.next-btn {
+  background-color: #007bff;
+}
+/* Contenedor principal del filtro */
+.filter-container-horizontal {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Título del filtro */
+.filter-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  margin-right: 15px;
+}
+
+/* Opciones del filtro en línea */
+.filter-options-horizontal {
+  display: flex;
+  gap: 15px; /* Espaciado entre las opciones */
+}
+
+.form-check-inline {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.form-check-input {
+  width: 18px;
+  height: 18px;
+  accent-color: #007bff; /* Cambia el color del checkbox marcado */
+  cursor: pointer;
+}
+
+.form-check-label {
+  font-size: 14px;
+  color: #555;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.form-check-label:hover {
+  color: #007bff; /* Cambia el color del texto al pasar el ratón */
+}
+
+

@@ -1,0 +1,248 @@
+<div class="container">
+  <div class="">
+    <h2><b>Usuarios</b></h2>
+    <div class="search-bar">
+      <input type="text" placeholder="Buscar" [(ngModel)]="searchTerm" (input)="buscarUsuarios()" class="search-input"/>
+      <button class="action-button export-button" (click)="descargarReporte()"><i class="fa-solid fa-download"></i>  Reporte</button>
+      <button class="action-button new-user-button" (click)="abrirModalCrearUsuario()">
+        <i class="fa-solid fa-plus"></i> Nuevo Usuario
+      </button>
+      <button class="action-button download-button" (click)="descargarFormatoExcel()">
+        <i class="fa-solid fa-file-excel"></i> Descargar Formato Excel
+      </button>
+      <div class="import-container">
+        <label for="formFile" class="import-label">
+          <i class="fa-solid fa-file-import"></i> Importar Datos
+        </label>
+        <input type="file" id="formFile" (change)="onFileChange($event)" accept=".xlsx" required/>
+        <button class="submit-button" (click)="uploadFile()">Subir Archivo</button>
+      </div>
+    </div>
+    <br>
+    <!-- Contenedor de filtros -->
+    <div class="filter-container-horizontal">
+      <h4 class="filter-title">Filtrar por Estado:</h4>
+      <div class="filter-options-horizontal">
+        <div *ngFor="let status of statuses" class="form-check-inline">
+          <input
+            type="checkbox"
+            [value]="status"
+            id="filter-{{ status }}"
+            class="form-check-input"
+            (change)="actualizarFiltros(status, $event)"
+          />
+          <label for="filter-{{ status }}" class="form-check-label">{{ status }}</label>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <!-- Tabla de datos -->
+  <table>
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>DNI</th>
+      <th>Código</th>
+      <th>Email</th>
+      <th>Horas Obtenidas</th>
+      <th>Ocupacion</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of usuariosPaginados,let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ user.nombre }}</td>
+      <td>{{ user.apellido }}</td>
+      <td>{{ user.dni }}</td>
+      <td>{{ user.codigo }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.horas_obtenidas }}</td>
+      <td>{{ user.status }}</td>
+      <td class="actions">
+        <button class="edit-btn" (click)="abrirModalEditarUsuario(user)">✏️</button>
+        <button class="delete-btn" (click)="eliminarUsuario(user.id)">🗑️</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <br>
+
+  <div class="pagination-container">
+    <div class="pagination-controls">
+      <span class="pagination-label">Líneas por página:</span>
+      <select class="pagination-select" [(ngModel)]="pageSize" (change)="actualizarTamanioPagina(pageSize)">
+        <option [value]="10">10</option>
+        <option [value]="20">20</option>
+        <option [value]="50">50</option>
+      </select>
+    </div>
+    <div class="pagination-info">
+      <span class="pagination-text">Página {{ paginaActual }} de {{ totalPaginas }}</span>
+    </div>
+    <div class="pagination-buttons">
+      <button class="pagination-btn prev-btn" [disabled]="paginaActual === 1" (click)="cambiarPagina(-1)">Anterior</button>
+      <button class="pagination-btn next-btn" [disabled]="paginaActual === totalPaginas" (click)="cambiarPagina(1)">Siguiente</button>
+    </div>
+  </div>
+
+
+  <!-- Modal para crear/editar usuario -->
+<div *ngIf="mostrarModalCrear || mostrarModalEditar" class="modal-overlay" (click)="cerrarModal()">
+  <div class="modal-dialog" (click)="$event.stopPropagation()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ mostrarModalCrear ? 'Crear Usuario' : 'Editar Usuario' }}</h5>
+        <button type="button" class="btn-close" (click)="cerrarModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="mostrarModalCrear ? crearUsuario() : actualizarUsuario()">
+          <div class="row">
+            <div class="col-md-6 form-group mb-3">
+              <label  for="nombre">Nombre</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="usuarioForm.nombre"
+                name="nombre"
+                placeholder="Ingrese nombre"
+                required
+              />
+            </div>
+            <div class="col-md-6 form-group mb-3">
+              <label for="apellido">Apellido</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="usuarioForm.apellido"
+                name="apellido"
+                placeholder="Ingrese apellido"
+                required
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 form-group mb-3">
+              <label for="dni">DNI</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="usuarioForm.dni"
+                name="dni"
+                placeholder="Ingrese DNI"
+                required
+              />
+            </div>
+            <div class="col-md-6 form-group mb-3">
+              <label for="codigo">Código</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="usuarioForm.codigo"
+                name="codigo"
+                placeholder="Ingrese código"
+                required
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 form-group mb-3">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                [(ngModel)]="usuarioForm.email"
+                name="email"
+                placeholder="Ingrese email"
+                required
+              />
+            </div>
+            <div class="col-md-6 form-group mb-3">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                [(ngModel)]="usuarioForm.password"
+                name="password"
+                placeholder="Ingrese contraseña"
+                required
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 form-group mb-3">
+              <label for="private_ingreso">Private Ingreso</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="usuarioForm.private_ingreso"
+                name="private_ingreso"
+                placeholder="Ingrese Private Ingreso"
+                required
+              />
+            </div>
+            <div class="col-md-6 form-group mb-3">
+              <label for="horas_obtenidas">Horas Obtenidas</label>
+              <input
+                type="number"
+                class="form-control"
+                [(ngModel)]="usuarioForm.horas_obtenidas"
+                name="horas_obtenidas"
+                placeholder="Ingrese Horas Obtenidas"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label for="status">Status</label>
+            <select
+              class="form-control"
+              [(ngModel)]="usuarioForm.status"
+              name="status"
+              required
+            >
+              <option [value]="'Estudiante'">Estudiante</option>
+              <option [value]="'Egresado'">Egresado</option>
+              <option [value]="'Docente'">Docente</option>
+              <option [value]="'Retirado'">Retirado</option>
+            </select>
+          </div>
+          <div style="display: flex">
+            <div class="form-group" style="width: 250px">
+              <label for="carrera">Carrera</label>
+              <select id="carrera" [(ngModel)]="usuarioForm.carrera.id" name="carrera_id" class="form-control" required>
+                <option *ngFor="let carrera of carreras" [value]="carrera.id">{{ carrera.nombre }}</option>
+              </select>
+            </div>
+
+            <!-- Campo de Rol -->
+            <div class="form-group" style="margin-left: 40px; width: 250px">
+              <label for="rol">Rol</label>
+              <select id="rol" [(ngModel)]="usuarioForm.rol.id" name="rol_id" class="form-control" required>
+                <option *ngFor="let rol of roles" [value]="rol.id">{{ rol.nombre }}</option>
+              </select>
+            </div>
+          </div>
+          <br>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary w-100">
+              {{ mostrarModalCrear ? 'Crear Usuario' : 'Actualizar Usuario' }}
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+

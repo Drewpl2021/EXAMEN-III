@@ -1,0 +1,231 @@
+/* Contenedor principal */
+.container {
+  max-width: 1500px;
+  margin: auto;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* Encabezado */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-right: 10px;
+  width: 550px;
+}
+.card {
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+  color: #005fb1;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: #005fb1;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #003f7f;
+}
+
+h2 {
+  color: #333;
+  font-weight: bold;
+}
+modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-dialog {
+  max-width: 800px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.modal-title {
+  margin: 0;
+}/* Estilo para centrar el modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+}
+
+.modal-dialog {
+  background: #fff;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  background: #007bff;
+  color: #fff;
+  padding: 15px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.modal-header .btn-close {
+  color: #fff;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+}
+
+.modal-body {
+  padding: 20px;
+}
+/* Estilo general de los inputs */
+.custom-input {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover efecto */
+.custom-input:hover {
+  background-color: #f0f8ff;
+  border-color: #007bff;
+}
+
+/* Focus efecto */
+.custom-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+  background-color: white;
+}
+
+/* Etiquetas de los inputs */
+.form-label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Responsive: Cambiar tamaño en pantallas pequeñas */
+@media (max-width: 768px) {
+  .custom-input {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+}
+
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+
+
+/* Botón de acción */
+button {
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  text-align: center;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* Específico para el botón de agregar */
+.add-event-button {
+  background-color: #005fb1;
+}
+
+.add-event-button:hover {
+  background-color: #003f7f;
+}
+.custom-select {
+  background-color: #f4f4f9; /* Fondo claro */
+  border: 1px solid #005fb1; /* Borde azul */
+  border-radius: 4px; /* Bordes redondeados */
+  padding: 8px; /* Espaciado interno */
+  font-size: 16px; /* Tamaño de letra */
+  color: #333; /* Color del texto */
+  transition: all 0.3s ease; /* Animación al pasar el ratón */
+}
+
+.custom-select:focus {
+  outline: none; /* Sin borde azul feo */
+  box-shadow: 0 0 5px #005fb1; /* Sombra azul */
+}
+
+.custom-select option {
+  background-color: #ffffff; /* Fondo blanco */
+  color: #333; /* Texto gris oscuro */
+  padding: 8px; /* Espaciado interno */
+}

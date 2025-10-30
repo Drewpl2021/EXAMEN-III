@@ -1,0 +1,160 @@
+<!-- layout.component.html -->
+<div class="body">
+
+  <!-- Barra lateral fija -->
+  <div [class.sidebar]="sidebarVisible">
+    <img src="../assets/images/logo.png" alt="Logo" class="toolbar-logo" (click)="irAUpeu()" style="cursor: pointer;"/>
+    <div style="display: flex; justify-content: center; align-items: center;" style="margin-top: 50px">
+
+      <p style="color: white; text-align: center;">
+        <i class="fa-regular fa-user" style="font-size: 2em;"></i><br>
+        {{ usuario.nombre }} {{ usuario.apellido }}
+      </p>
+    </div>
+
+    <!-- Opciones de menú según el rol -->
+    <ng-container *ngIf="usuario.rol">
+      <!-- Opciones para el rol 1 (e.g., "ROLE_USER") -->
+      <a *ngIf="usuario.rol === 'Estudiante'" style="margin-top: 50px"  routerLink="/main" routerLinkActive="active">Inicio</a>
+      <a *ngIf="usuario.rol === 'Estudiante'" routerLink="/proximos_eventos" routerLinkActive="active">Próximos Eventos</a>
+      <a *ngIf="usuario.rol === 'Estudiante'" routerLink="/eventos_participados" routerLinkActive="active">Eventos Participados</a>
+
+      <!-- Opciones para el rol 2 (e.g., "ROLE_ADMIN") -->
+      <a *ngIf="usuario.rol === 'Coordinador'" routerLink="/main" routerLinkActive="active">Home</a>
+      <a *ngIf="usuario.rol === 'Coordinador'" routerLink="/gestion_eventos" routerLinkActive="active">Gestión de Eventos</a>
+      <a *ngIf="usuario.rol === 'Coordinador'" routerLink="/importar_datos" routerLinkActive="active">Gestión de Usuarios</a>
+    </ng-container>
+
+    <div class="profile-section">
+      <button (click)="logout()" class="logout-btn">
+        <i class="fa-solid fa-user" style="color: white; margin-right: 5px;"></i>
+        Cerrar sesión
+      </button>
+    </div>
+  </div>
+
+  <div class="content">
+    <!-- Contenido inicial -->
+    <div *ngIf="mostrarContenidoInicial" class="contenido-inicial">
+      <div class="welcome-container">
+        <h1 class="welcome-title">
+          <i class="fa-solid fa-tachometer-alt"></i>
+          Bienvenido al Sistema de Gestión</h1>
+        <p class="welcome-text">
+          Mira que te mando que te esfuerces y seas valiente: no temas ni desmayes, porque Jehová tu Dios será contigo en donde quiera que fueres
+          <strong>JOSUE 1:9</strong>
+        </p>
+
+        <div class="video-container">
+          <iframe
+            id="video-frame"
+            width="800"
+            height="450"
+            src="https://www.youtube.com/embed/ukliAPQYkCY?autoplay=1&mute=0"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+
+        <button
+          class="add-button fixed-button"
+          (click)="abrirModal()"
+        >
+          <i class="fa-solid fa-lock"></i> Cambiar Contraseña
+        </button>
+      </div>
+
+
+
+
+      <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-hidden="true" (click)="cerrarModal()">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" (click)="$event.stopPropagation()">
+          <div class="modal-content">
+            <!-- Header del modal -->
+            <div class="modal-header bg-primary text-white">
+              <h5 class="modal-title">Cambiar Contraseña</h5>
+              <button type="button" class="btn-close text-white" (click)="cerrarModal()" aria-label="Close"></button>
+            </div>
+
+            <!-- Cuerpo del modal -->
+            <div class="modal-body">
+              <form (ngSubmit)="onChangePassword()">
+                <div class="mb-3 position-relative">
+                  <label for="currentPassword" class="form-label">Contraseña Actual</label>
+                  <div class="position-relative">
+                    <input
+                      [type]="showCurrentPassword ? 'text' : 'password'"
+                      class="form-control"
+                      id="currentPassword"
+                      [(ngModel)]="currentPassword"
+                      name="currentPassword"
+                      placeholder="Ingresa tu contraseña actual"
+                      required
+                    />
+                    <i
+                      class="fa password-toggle-icon"
+                      [ngClass]="showCurrentPassword ? 'fa-eye-slash' : 'fa-eye'"
+                      (click)="togglePasswordVisibility('current')"
+                    ></i>
+                  </div>
+                </div>
+                <div class="mb-3 position-relative">
+                  <label for="newPassword" class="form-label">Nueva Contraseña</label>
+                  <div class="position-relative">
+                    <input
+                      [type]="showNewPassword ? 'text' : 'password'"
+                      class="form-control"
+                      id="newPassword"
+                      [(ngModel)]="newPassword"
+                      name="newPassword"
+                      placeholder="Ingresa una nueva contraseña"
+                      required
+                    />
+                    <i
+                      class="fa password-toggle-icon"
+                      [ngClass]="showNewPassword ? 'fa-eye-slash' : 'fa-eye'"
+                      (click)="togglePasswordVisibility('new')"
+                    ></i>
+                  </div>
+                </div>
+                <div class="mb-3 position-relative">
+                  <label for="confirmPassword" class="form-label">Confirmar Nueva Contraseña</label>
+                  <div class="position-relative">
+                    <input
+                      [type]="showConfirmPassword ? 'text' : 'password'"
+                      class="form-control"
+                      id="confirmPassword"
+                      [(ngModel)]="confirmPassword"
+                      name="confirmPassword"
+                      placeholder="Confirma tu nueva contraseña"
+                      required
+                    />
+                    <i
+                      class="fa password-toggle-icon"
+                      [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"
+                      (click)="togglePasswordVisibility('confirm')"
+                    ></i>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100"><i class="fa-solid fa-lock"></i>  Cambiar Contraseña</button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+    </div>
+
+    <!-- Contenido de cada página -->
+    <router-outlet (activate)="onActivate()"></router-outlet>
+  </div>
+
+</div>

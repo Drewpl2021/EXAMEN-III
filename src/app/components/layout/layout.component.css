@@ -1,0 +1,291 @@
+/* Estilos generales */
+.body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Sidebar */
+.sidebar {
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  width: 250px; /* Ancho fijo de la barra lateral */
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #00234b;
+  padding-top: 20px;
+  overflow-x: hidden; /* Oculta el scroll horizontal */
+}
+
+/* Enlaces dentro de la barra */
+.sidebar a {
+  padding: 15px 10px;
+  text-decoration: none;
+  font-size: 18px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+/* Enlaces dentro de la barra */
+.sidebar p {
+  padding: 15px 10px;
+  text-decoration: none;
+  font-size: 18px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+/* Hover efecto en enlaces */
+.sidebar a:hover {
+  background-color: #058df3;
+  color: white;
+}
+.no-style-link {
+  all: unset; /* Resetea todos los estilos del enlace */
+  display: inline-block; /* Asegura que funcione correctamente con imágenes */
+}
+
+.no-style-link img {
+  display: block; /* Asegura que la imagen se ajuste correctamente */
+}
+
+/* Estado activo del enlace */
+.sidebar a.active {
+  background-color: #0170cc;
+  color: white;
+}
+
+.toolbar-logo {
+  height: 60px;
+  max-width: 100%;
+  object-fit: contain;
+  margin-left: 30px;
+}
+
+/* Contenido principal */
+.content {
+  margin-left: 260px; /* Deja espacio para la barra lateral */
+  padding: 20px;
+  height: 100vh;
+  background-color: white;
+}
+
+.sidebar a.active {
+  background-color: #0170cc;
+  color: white;
+}
+/* Sección del perfil */
+.profile-section {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  background-color: #00234b;
+}
+
+.profile-pic {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%; /* Hacer la imagen circular */
+  margin-bottom: 10px;
+  border: 2px solid white;
+}
+
+.logout-btn {
+  background-color: #ff4c4c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #e60000;
+}
+
+.add-button {
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.add-button {
+  padding: 10px 20px;
+  background-color: #ffd966;
+  color: #333;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}.add-button:hover {
+   background-color: #003d80;
+ }
+
+
+
+
+.modal-content {
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-body {
+  padding: 15px;
+}
+
+.btn-primary {
+  background-color: #005fb1;
+  border-color: #005fb1;
+}
+
+.btn-primary:hover {
+  background-color: #004080;
+  border-color: #004080;
+}
+
+
+.modal.fade.show {
+  background-color: rgba(0, 0, 0, 0.5); /* Sombra en toda la pantalla */
+}
+
+/* Transición suave */
+.modal-dialog {
+  transform: scale(0.8);
+  opacity: 0;
+}
+
+.modal.fade.show .modal-dialog {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Botón cerrar personalizado */
+.btn-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.btn-close:hover {
+  opacity: 1;
+}
+
+/* Input focus */
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+.position-relative {
+  position: relative;
+}
+
+.password-toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #6c757d; /* Color gris para el ícono */
+}
+
+.password-toggle-icon:hover {
+  color: #0056b3; /* Color azul al pasar el mouse */
+}
+/* Contenedor principal */
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative; /* Para posicionar el botón dentro del contenedor */
+}
+
+/* Estilo del título */
+.welcome-title {
+  font-size: 3rem;
+  color: #005fb1;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* Estilo del texto */
+.welcome-text {
+  font-size: 1.5rem;
+  color: #555;
+  margin-top: 0;
+}
+
+/* Contenedor del video */
+.video-container {
+  margin-top: 20px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Botón para cambiar contraseña */
+.add-button {
+  padding: 10px 20px;
+  font-size: 14px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  background-color: #005fb1;
+}
+
+/* Hover del botón */
+.add-button:hover {
+  transform: scale(1.05);
+  background-color: #003f7f;
+}
+
+/* Posición fija del botón */
+.fixed-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.video-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+.welcome-text {
+  font-size: 1.2rem; /* Tamaño de letra */
+  color: #555; /* Color suave */
+  text-align: center; /* Centrado */
+  font-style: italic; /* Estilo cursiva */
+  margin: 20px auto; /* Espaciado superior e inferior */
+  max-width: 800px; /* Ancho máximo */
+  line-height: 1.8; /* Espaciado entre líneas */
+  border-left: 5px solid #005fb1; /* Barra decorativa en el lado izquierdo */
+  padding-left: 15px; /* Espaciado del texto respecto a la barra */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  background-color: #f9f9f9; /* Fondo claro */
+  border-radius: 8px; /* Bordes redondeados */
+}

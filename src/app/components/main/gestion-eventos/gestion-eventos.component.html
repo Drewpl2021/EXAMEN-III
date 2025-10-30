@@ -1,0 +1,203 @@
+<div class="container">
+  <h2>Gestión de eventos</h2>
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <input
+      type="text"
+      placeholder="Buscar evento"
+      [(ngModel)]="searchTerm"
+      (input)="buscarEventos()"
+      class="form-control w-50"
+    />
+    <select class="form-control w-25" [(ngModel)]="anioSeleccionado" (change)="filtrarPorAnio(anioSeleccionado)">
+      <option value="">Todos los años</option>
+      <option *ngFor="let anio of aniosDisponibles" [value]="anio">{{ anio }}</option>
+    </select>
+    <button (click)="abrirModalCrearEvento()" class="btn btn-primary">
+      <i class="fa-solid fa-plus"></i> Agregar Evento
+    </button>
+  </div>
+
+
+  <!-- Contenedor de tarjetas de eventos -->
+  <div class="row">
+    <div *ngIf="isLoading" class="col-12 text-center">
+      <p class="alert alert-info mt-4" style="font-size: 20px">
+        Cargando eventos...
+        <img src="assets/images/loading.gif" alt="Cargando" style="width: 50px;">
+      </p>
+    </div>
+
+    <!-- Mostrar mensaje si no hay eventos y ya no se están cargando -->
+    <div *ngIf="!isLoading && eventosFiltrados.length === 0" class="col-12 text-center">
+      <p class="alert alert-warning mt-4" style="font-size: 40px">
+        <b>No hay ningún evento creado.</b>
+        <img src="assets/images/espera.png" alt="No eventos">
+      </p>
+    </div>
+    <!-- Mostrar las tarjetas de eventos si existen -->
+    <div *ngFor="let evento of eventosFiltrados.slice().reverse()" class="col-md-4 mb-4 d-flex align-items-stretch">
+      <div class="card" style="width: 100%;">
+        <div class="card-body">
+          <h5 class="card-title">{{ evento.nombre }}</h5>
+          <p class="card-text">{{ evento.lugar }}</p>
+          <p class="card-text">Inicia el día {{ evento.fecha_inicio | date:'EEEE d \'de\' MMMM\' del\' y':'es' }}</p>
+          <p class="card-text">Termina {{ evento.fecha_fin | date:'EEEE d \'de\' MMMM\' del\' y':'es' }}</p>
+          <p class="card-text">La hora del evento es a las {{ evento.hora }} horas</p>
+          <p class="card-text">Horas Válidas: {{ evento.horas_obtenidas }}</p>
+          <p class="card-text">Dirección: {{ evento.direccion }}</p>
+          <p class="card-text">Estado: <b>{{ evento.status }}</b></p>
+
+          <div class="d-flex justify-content-between mt-3">
+            <button [routerLink]="['/lista_participantes', evento.id]" class="btn" style="background-color: #005fb1; color: white">Ver inscritos</button>
+            <button (click)="abrirModalEditarEvento(evento)" class="btn" style="background-color: #058DF3; color: white">Editar</button>
+            <button (click)="eliminarEvento(evento.id)" class="btn btn-danger">Eliminar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal para crear un nuevo evento -->
+  <div class="modal-overlay" tabindex="-1" [ngClass]="{ 'show': mostrarModalCrear }" style="display: block;" *ngIf="mostrarModalCrear" (click)="cerrarModalCrearEvento()">
+    <div class="modal-dialog" (click)="detenerPropagacion($event)">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Agregar Nuevo Evento</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="cerrarModalCrearEvento()"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="crearEvento()">
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="nombre" [(ngModel)]="nuevoEvento.nombre" name="nombre" required>
+            </div>
+            <div class="mb-3">
+              <label for="lugar" class="form-label">Lugar</label>
+              <input type="text" class="form-control" id="lugar" [(ngModel)]="nuevoEvento.lugar" name="lugar" required>
+            </div>
+            <div class="mb-3">
+              <label for="fecha_inicio" class="form-label">Inicio del evento</label>
+              <input
+                type="date"
+                class="form-control custom-input"
+                id="fecha_inicio"
+                [(ngModel)]="nuevoEvento.fecha_inicio"
+                name="fecha_inicio"
+                required>
+            </div>
+            <div class="mb-3">
+              <label for="fecha_fin" class="form-label" required>Fin del evento</label>
+              <input
+                type="date"
+                class="form-control custom-input"
+                id="fecha_fin"
+                [(ngModel)]="nuevoEvento.fecha_fin"
+                name="fecha_fin"
+                required>
+            </div>
+            <div class="mb-3">
+              <label for="hora" class="form-label">Hora</label>
+              <input
+                type="time"
+                class="form-control custom-input"
+                id="hora"
+                [(ngModel)]="nuevoEvento.hora"
+                name="hora"
+                required>
+            </div>
+
+            <div class="mb-3">
+              <label for="horas_obtenidas" class="form-label">Horas Válidas</label>
+              <input type="number" class="form-control" id="horas_obtenidas" [(ngModel)]="nuevoEvento.horas_obtenidas" name="horas_obtenidas" required>
+            </div>
+            <div class="mb-3">
+              <label for="direccion" class="form-label">Dirección</label>
+              <input type="text" class="form-control" id="direccion" [(ngModel)]="nuevoEvento.direccion" name="direccion" required>
+            </div>
+            <div class="mb-3">
+              <label for="status" class="form-label">Estado</label>
+              <select class="form-select" id="status" [(ngModel)]="nuevoEvento.status" name="status" required>
+                <option value="Activo">Activo</option>
+                <option value="Finalizado">Finalizado</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Crear Evento</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para editar un evento existente -->
+  <div class="modal-overlay" tabindex="-1" [ngClass]="{ 'show': mostrarModalEditar }" style="display: block;" *ngIf="mostrarModalEditar" (click)="cerrarModalEditarEvento()">
+    <div class="modal-dialog" (click)="detenerPropagacion($event)">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar Evento</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="cerrarModalEditarEvento()"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="actualizarEvento()">
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="nombre" [(ngModel)]="eventoSeleccionado.nombre" name="nombre" required>
+            </div>
+            <div class="mb-3">
+              <label for="lugar" class="form-label">Lugar</label>
+              <input type="text" class="form-control" id="lugar" [(ngModel)]="eventoSeleccionado.lugar" name="lugar" required>
+            </div>
+            <div class="mb-3">
+              <label for="fecha_inicio" class="form-label">Inicio del evento</label>
+              <input
+                type="date"
+                class="form-control custom-input"
+                id="fecha_inicio"
+                [(ngModel)]="eventoSeleccionado.fecha_inicio"
+                name="fecha_inicio"
+                required>
+            </div>
+            <div class="mb-3">
+              <label for="fecha_fin" class="form-label">Fin del evento</label>
+              <input
+                type="date"
+                class="form-control custom-input"
+                id="fecha_fin"
+                [(ngModel)]="eventoSeleccionado.fecha_fin"
+                name="fecha_fin"
+                required>
+            </div>
+            <div class="mb-3">
+              <label for="hora" class="form-label">Hora</label>
+              <input
+                type="time"
+                class="form-control custom-input"
+                id="hora"
+                [(ngModel)]="eventoSeleccionado.hora"
+                name="hora"
+                required>
+            </div>
+
+            <div class="mb-3">
+              <label for="horas_obtenidas" class="form-label">Horas Válidas</label>
+              <input type="number" class="form-control" id="horas_obtenidas" [(ngModel)]="eventoSeleccionado.horas_obtenidas" name="horas_obtenidas" required>
+            </div>
+            <div class="mb-3">
+              <label for="direccion" class="form-label">Dirección</label>
+              <input type="text" class="form-control" id="direccion" [(ngModel)]="eventoSeleccionado.direccion" name="direccion" required>
+            </div>
+            <div class="mb-3">
+              <label for="status" class="form-label">Status</label>
+              <select class="form-select" id="status" [(ngModel)]="eventoSeleccionado.status" name="status" required>
+                <option value="Activo">Activo</option>
+                <option value="Finalizado">Finalizado</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Actualizar Evento</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="container">
+  <h2>Eventos en los que estás inscrito</h2>
+  <div class="info-container">
+    <h3>Tienes <b>{{ horasTotales }}</b> horas de Vinculación con el Medio</h3>
+    <div class="datetime-container">
+      <span class="date">{{ fechaActual }}</span>
+    </div>
+  </div>
+
+  <br><br>
+  <div class="row">
+
+    <div *ngIf="eventosInscritos.length === 0" class="col-12 text-center">
+      <p class="alert alert-warning mt-4" style="font-size: 40px"><b>Aun no te has inscrito a ningun evento</b>
+        <img src="assets/images/espera.png"></p>
+    </div>
+
+
+
+    <div *ngFor="let evento of eventosInscritos" class="col-md-4 mb-4 d-flex align-items-stretch">
+      <div class="card" style="width: 100%; position: relative;">
+        <img
+          *ngIf="evento.status === 'Activo'"
+          src="assets/images/activo.jpg"
+          class="estado-sello"
+          alt="Activo">
+        <img style="width: 100px"
+             *ngIf="evento.status === 'Finalizado'"
+             src="assets/images/finalizado.png"
+             class="estado-sello"
+             alt="Finalizado">
+
+        <div class="card-body">
+          <h5 class="card-title">{{ evento.nombre }}</h5>
+          <p class="card-text">{{ evento.lugar }}</p>
+          <p class="card-text">Fecha: El día {{ evento.fecha_inicio | date:'EEEE d \'de\' MMMM\' del\' y':'es' }} a las {{ evento.hora }}</p>
+          <p class="card-text">Horas del Evento: {{ evento.horas_obtenidas }}</p>
+          <p *ngIf="evento.status === 'Finalizado'" class="card-text">Horas Asignadas: {{ evento.horas_asignadas }}</p>
+          <p *ngIf="evento.status === 'Finalizado' && +evento.horas_obtenidas !== +evento.horas_asignadas" class="card-text">
+            Descripción: {{ evento.detalles }}
+          </p>
+
+          <p class="card-text">Dirección: {{ evento.direccion }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
